@@ -1,0 +1,201 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* FULL WEB PAGE */
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0b1d14, #0f3d2e);
+}
+
+/* PAGE WRAPPER */
+.page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+/* MAIN LOGIN CONTAINER */
+.login-container {
+  width: 100%;
+  max-width: 900px;
+  background: linear-gradient(180deg, #0f2e20, #081a12);
+  border-radius: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+  overflow: hidden;
+}
+
+/* LEFT BRAND SECTION */
+.brand-section {
+  background: linear-gradient(180deg, #122f22, #081a12);
+  padding: 50px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.app-icon {
+  width: 64px;
+  height: 64px;
+  background: #1fd365;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: #0b1d14;
+  margin-bottom: 20px;
+}
+
+.brand-section h1 {
+  font-size: 32px;
+}
+
+.tagline {
+  font-size: 15px;
+  color: #9debb8;
+  margin-top: 6px;
+}
+
+/* RIGHT FORM SECTION */
+.form-section {
+  padding: 50px;
+  color: white;
+}
+
+.tabs {
+  display: flex;
+  background: #0d2a1e;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.tab {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  color: #aaa;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: #122f22;
+  color: #1fd365;
+  border-radius: 12px;
+}
+
+/* INPUTS */
+.input-group {
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  font-size: 13px;
+  color: #b5e7c9;
+}
+
+.password-label {
+  display: flex;
+  justify-content: space-between;
+}
+
+.password-label a {
+  font-size: 12px;
+  color: #1fd365;
+  text-decoration: none;
+}
+
+.input-box {
+  margin-top: 6px;
+  background: #0c2419;
+  padding: 14px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.input-box input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: white;
+}
+
+.input-box i {
+  color: #6fe3a1;
+  cursor: pointer;
+}
+
+/* BUTTONS */
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  background: #1fd365;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #0b1d14;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.divider {
+  text-align: center;
+  font-size: 12px;
+  color: #aaa;
+  margin: 20px 0;
+}
+
+.google-btn {
+  width: 100%;
+  padding: 12px;
+  background: #0c2419;
+  border: none;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.google-btn img {
+  width: 18px;
+}
+
+.footer-text {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 12px;
+  color: #aaa;
+}
+
+.footer-text span {
+  color: #1fd365;
+  cursor: pointer;
+}
+
+/* RESPONSIVE (MOBILE) */
+@media (max-width: 768px) {
+  .login-container {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-section {
+    text-align: center;
+    align-items: center;
+  }
+}

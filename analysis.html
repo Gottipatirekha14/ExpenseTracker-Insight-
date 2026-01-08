@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spending Analysis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="analysis.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="page-bg">
+  <div class="analysis-card">
+
+    <!-- HEADER -->
+    <header class="top-header">
+
+  <!-- BACK BUTTON -->
+  <i class="fa-solid fa-arrow-left back-btn" onclick="goBack()"></i>
+
+  <div>
+    <h2>Spending Analysis</h2>
+    <p>Your financial health at a glance</p>
+  </div>
+
+  <!-- Export button TOP RIGHT -->
+  <button class="export-btn">
+    <i class="fa-solid fa-download"></i> Export
+  </button>
+
+</header>
+
+
+    <!-- TABS (NO WEEK) -->
+    <div class="tabs">
+      <button class="tab active" data-type="day">Day</button>
+      <button class="tab" data-type="month">Month</button>
+      <button class="tab" data-type="year">Year</button>
+    </div>
+
+    <!-- CALENDAR PICKER (ICON ONLY) -->
+    <div class="calendar-row">
+
+      <!-- Day -->
+      <div class="calendar-box" id="dayBox">
+        <i class="fa-solid fa-calendar-days"></i>
+        <input type="date" id="dayPicker">
+      </div>
+
+      <!-- Month -->
+      <div class="calendar-box hidden" id="monthBox">
+        <i class="fa-solid fa-calendar-days"></i>
+        <input type="month" id="monthPicker">
+      </div>
+
+      <!-- Year -->
+      <div class="calendar-box hidden" id="yearBox">
+        <i class="fa-solid fa-calendar-days"></i>
+        <input type="number" id="yearPicker" min="2000" max="2100" placeholder="Enter Year">
+      </div>
+
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-grid">
+
+      <div class="stat big">
+        <p>Total Spent</p>
+        <h1>$450.00</h1>
+        <div class="progress">
+          <div class="bar"></div>
+        </div>
+        <span>$800 Limit</span>
+      </div>
+
+      <div class="stat">
+        <p>Remaining</p>
+        <h2>$120.00</h2>
+        <span class="badge green">Healthy</span>
+      </div>
+
+      <div class="stat">
+        <p>Daily Avg</p>
+        <h2>$15.00</h2>
+        <span class="badge red">-2%</span>
+      </div>
+
+    </div>
+
+    <!-- WEEKLY TREND -->
+    <section class="section">
+      <h3>Spending Trend</h3>
+      <canvas id="trendChart"></canvas>
+    </section>
+
+    <!-- BOTTOM SECTION -->
+    <section class="section grid-2">
+
+      <div class="card">
+        <h3>Spending by Category</h3>
+        <canvas id="categoryChart"></canvas>
+      </div>
+
+      <div class="card">
+        <h3>Top Expenses</h3>
+        <div class="expense"><span>Textbooks</span><b>$120.00</b></div>
+        <div class="expense"><span>Groceries</span><b>$85.50</b></div>
+        <div class="expense"><span>Student Fee</span><b>$50.00</b></div>
+      </div>
+
+    </section>
+
+  </div>
+</div>
+
+<script src="analysis.js"></script>
+<script type="module" src="firebase.js"></script>
+</body>
+</html>

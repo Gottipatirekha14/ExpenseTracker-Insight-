@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ExpenseInsight | Login</title>
+
+  <link rel="stylesheet" href="loginstyle.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="page">
+  <div class="login-container">
+
+    <!-- BRAND -->
+    <div class="brand-section">
+      <div class="app-icon">
+        <i class="fa-solid fa-piggy-bank"></i>
+      </div>
+      <h1>ExpenseInsight</h1>
+      <p class="tagline">Reflect. Learn. Save.</p>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-section">
+
+      <div class="tabs">
+        <button class="tab active" onclick="showLogin()">Log In</button>
+        <button class="tab" onclick="showSignup()">Sign Up</button>
+      </div>
+
+      <!-- SIGNUP NAME (hidden on login tab) -->
+      <div class="input-group" id="nameGroup" style="display:none;">
+        <label>Full Name</label>
+        <div class="input-box">
+          <input type="text" id="name" placeholder="Name">
+          <i class="fa-regular fa-user"></i>
+        </div>
+      </div>
+
+      <!-- EMAIL -->
+      <div class="input-group">
+        <label>Email Address</label>
+        <div class="input-box">
+          <input type="email" id="email" placeholder="student@university.edu">
+          <i class="fa-regular fa-envelope"></i>
+        </div>
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="input-group">
+        <div class="password-label">
+          <label>Password</label>
+          <a href="#" onclick="forgotPassword()">Forgot Password?</a>
+        </div>
+        <div class="input-box">
+          <input type="password" id="password" placeholder="********">
+          <i class="fa-regular fa-eye-slash" id="togglePassword"></i>
+        </div>
+      </div>
+
+      <!-- LOGIN / SIGNUP BUTTON -->
+      <button class="login-btn" onclick="handleAuth()">Log In</button>
+
+      <div class="divider">Or continue with</div>
+
+      <button class="google-btn" onclick="googleLogin()">
+        <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png">
+        Google
+      </button>
+
+      <p class="footer-text">
+        New here? <span onclick="showSignup()">Create Account</span>
+      </p>
+
+    </div>
+  </div>
+</div>
+
+<script type="module" src="loginindex.js"></script>
+<script type="module" src="firebase.js"></script>
+</body>
+</html>

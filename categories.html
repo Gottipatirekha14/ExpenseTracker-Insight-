@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Categories</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * { box-sizing: border-box; font-family: "Segoe UI", sans-serif; }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(180deg, #0b1f15, #020b07);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .app {
+      width: 390px;
+      height: 760px;
+      background: linear-gradient(180deg, #0f2a1f, #07150f);
+      border-radius: 26px;
+      box-shadow: 0 20px 40px rgba(0,0,0,.35);
+      color: #fff;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      padding: 18px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #1f3d2d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2ee66b;
+      cursor: pointer;
+    }
+
+    .content {
+      flex: 1;
+      padding: 16px 18px;
+      overflow-y: auto;
+    }
+
+    .content::-webkit-scrollbar { width: 0; }
+
+    .section-title {
+      font-size: 14px;
+      margin: 16px 0 10px;
+      color: #b7f3cd;
+    }
+
+    .category {
+      background: #112c20;
+      border-radius: 14px;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .category-left {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .cat-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .cat-name { font-size: 14px; font-weight: 500; }
+    .cat-sub { font-size: 11px; color: #8fdcb4; }
+
+    .delete-btn {
+      cursor: pointer;
+      color: #ff7a7a;
+      font-size: 16px;
+    }
+
+    .create {
+      margin: 18px 0;
+      padding: 14px;
+      border: 2px dashed #2ee66b;
+      border-radius: 14px;
+      text-align: center;
+      color: #2ee66b;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+<div class="app">
+
+  <div class="header">
+    <div class="icon-btn" onclick="history.back()">←</div>
+    <h2>Categories</h2>
+    <div class="icon-btn" onclick="addCategory()">+</div>
+  </div>
+
+  <div class="content">
+
+    <div class="section-title">Your Categories</div>
+    <div id="categoryList"></div>
+
+    <div class="create" onclick="addCategory()">＋ Create New Category</div>
+  </div>
+
+</div>
+
+<!-- FIREBASE + LOGIC -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { 
+  getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, where 
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { 
+  getAuth, onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+/* FIREBASE CONFIG */
+const firebaseConfig = {
+  apiKey: "AIzaSyBk_6na8LJc-iHLT-V-rKGP36gry-ba-ec",
+  authDomain: "expense-tracker-6ec56.firebaseapp.com",
+  projectId: "expense-tracker-6ec56",
+  storageBucket: "expense-tracker-6ec56.appspot.com",
+  messagingSenderId: "243528703788",
+  appId: "1:243528703788:web:af90edcdd9cc6806b75689",
+  measurementId: "G-HZL12XB2QC"
+};
+
+/* INITIALIZE */
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+const categoryList = document.getElementById("categoryList");
+
+/* LOAD CATEGORIES */
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    categoryList.innerHTML = "<p>Please login</p>";
+    return;
+  }
+
+  const snap = await getDocs(
+    collection(db, "users", user.uid, "categories")
+  );
+
+  categoryList.innerHTML = "";
+
+  snap.forEach((docSnap) => {
+    const cat = docSnap.data();
+
+    categoryList.innerHTML += `
+      <div class="category">
+        <div class="category-left">
+          <div class="cat-icon">📁</div>
+          <div>
+            <div class="cat-name">${cat.name}</div>
+            <div class="cat-sub">${cat.type}</div>
+          </div>
+        </div>
+        ${
+          cat.type === "custom"
+            ? `<span class="delete-btn" onclick="deleteCategory('${docSnap.id}')">🗑</span>`
+            : ""
+        }
+      </div>
+    `;
+  });
+});
+
+/* ADD CATEGORY */
+window.addCategory = async () => {
+  const name = prompt("Enter category name");
+  if (!name) return;
+
+  const user = auth.currentUser;
+  if (!user) {
+    alert("Please login first");
+    return;
+  }
+
+  await addDoc(
+    collection(db, "users", user.uid, "categories"),
+    {
+      name: name,
+      type: "custom",
+      createdAt: new Date()
+    }
+  );
+};
+
+/* DELETE CATEGORY */
+window.deleteCategory = async (id) => {
+  const user = auth.currentUser;
+
+  const q = query(
+    collection(db, "users", user.uid, "transactions"),
+    where("categoryId", "==", id)
+  );
+
+  const snap = await getDocs(q);
+
+  if (!snap.empty) {
+    alert("Category is used in transactions");
+    return;
+  }
+
+  await deleteDoc(
+    doc(db, "users", user.uid, "categories", id)
+  );
+};
+</script>
+
+<!-- Firebase SDKs -->
+
+
+</body>
+</html>

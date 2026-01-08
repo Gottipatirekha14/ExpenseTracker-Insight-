@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Transaction</title>
+
+  <link rel="stylesheet" href="add-transaction.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="page-bg">
+  <div class="app-card">
+
+    <!-- Header -->
+    <header class="top-bar">
+      <i class="fa-solid fa-arrow-left" onclick="goBack()"></i>
+      <h3>New Transaction</h3>
+      <i class="fa-solid fa-ellipsis-vertical"></i>
+    </header>
+
+    <!-- Toggle -->
+    <div class="toggle">
+      <button class="toggle-btn active" data-type="income">Income</button>
+      <button class="toggle-btn" data-type="expense">Expense</button>
+    </div>
+
+    <!-- Amount -->
+    <div class="amount-box">
+      <p>Enter Amount</p>
+      <div class="amount">
+        <span>₹</span>
+        <input type="number" id="amountInput" placeholder="0">
+      </div>
+    </div>
+
+    <!-- Expense-only -->
+    <div id="expenseFields">
+
+      <!-- Date box -->
+      <div class="date-box" onclick="openCalendar()">
+        <i class="fa-solid fa-calendar-days"></i>
+        <div>
+          <p>Date & Time</p>
+          <h4 id="dateText">Select date</h4>
+        </div>
+      </div>
+
+      <!-- ✅ REAL WORKING CALENDAR (INLINE) -->
+      <input
+        type="datetime-local"
+        id="calendar"
+        class="calendar-input"
+        onchange="setDate()"
+      >
+
+      <!-- Category -->
+      <section>
+        <h4 class="section-title">Category</h4>
+        <div class="category-grid">
+          <div class="cat active">Food</div>
+          <div class="cat">Transport</div>
+          <div class="cat">Academic</div>
+          <div class="cat">Fun</div>
+          <div class="cat">Health</div>
+          <div class="cat">Shopping</div>
+        </div>
+      </section>
+
+      <!-- Payment -->
+      <section>
+        <h4 class="section-title">Payment Mode</h4>
+        <div class="payment">
+          <span class="pay active">UPI</span>
+          <span class="pay">Cash</span>
+          <span class="pay">Card</span>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Save -->
+    <section class="reflection">
+      <button class="save-btn" onclick="saveTransaction()">Save</button>
+    </section>
+
+  </div>
+</div>
+
+<script>
+  
+  let type = "income";
+  let selectedDate = "";
+
+  function goBack() {
+    window.location.href = "dashboard.html";
+  }
+
+  /* Toggle */
+  document.querySelectorAll(".toggle-btn").forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll(".toggle-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      type = btn.dataset.type;
+
+      document.getElementById("expenseFields").style.display =
+        type === "expense" ? "block" : "none";
+    };
+  });
+
+  /* Calendar focus */
+  function openCalendar() {
+    document.getElementById("calendar").focus();
+  }
+
+  /* Date change */
+  function setDate() {
+    const val = document.getElementById("calendar").value;
+    if (val) {
+      selectedDate = new Date(val).toLocaleString();
+      document.getElementById("dateText").innerText = selectedDate;
+    }
+  }
+
+  /* Category */
+  document.querySelectorAll(".cat").forEach(cat => {
+    cat.onclick = () => {
+      document.querySelectorAll(".cat").forEach(c => c.classList.remove("active"));
+      cat.classList.add("active");
+    };
+  });
+
+  /* Payment */
+  document.querySelectorAll(".pay").forEach(p => {
+    p.onclick = () => {
+      document.querySelectorAll(".pay").forEach(x => x.classList.remove("active"));
+      p.classList.add("active");
+    };
+  });
+
+  /* Save */
+  function saveTransaction() {
+    const amount = Number(document.getElementById("amountInput").value);
+    if (!amount || amount <= 0) {
+      alert("Enter valid amount");
+      return;
+    }
+
+    let balance = Number(localStorage.getItem("balance")) || 0;
+
+    if (type === "income") {
+      balance += amount;
+      localStorage.setItem("balance", balance);
+    } else {
+      if (!selectedDate) {
+        alert("Please select date");
+        return;
+      }
+
+      const category = document.querySelector(".cat.active").innerText;
+      const payment = document.querySelector(".pay.active").innerText;
+
+      const expense = {
+        amount,
+        category,
+        payment,
+        time: selectedDate
+      };
+
+      const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+      transactions.push(expense);
+      localStorage.setItem("transactions", JSON.stringify(transactions));
+
+      balance -= amount;
+      localStorage.setItem("balance", balance);
+    }
+
+    window.location.href = "dashboard.html";
+  }
+
+  document.getElementById("expenseFields").style.display = "none";
+</script>
+<script type="module" src="firebase.js"></script>
+</body>
+</html>

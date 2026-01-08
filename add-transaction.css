@@ -1,0 +1,195 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Desktop background */
+.page-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0b1d14, #0f3d2e);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+/* ⬆️ MAIN CHANGE: Desktop width */
+.app-card {
+  width: 900px;                 /* desktop size */
+  max-width: 95%;
+  background: linear-gradient(180deg,#0f2e20,#081a12);
+  border-radius: 22px;
+  padding: 32px;
+  color: white;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+}
+
+/* Header */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.top-bar h3 {
+  font-size: 22px;
+}
+
+/* Toggle */
+.toggle {
+  display: flex;
+  background: #0d2a1e;
+  border-radius: 16px;
+  margin: 24px 0;
+}
+
+.toggle button {
+  flex: 1;
+  padding: 14px;
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  color: #aaa;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.toggle .active {
+  background: #1fd365;
+  color: #0b1d14;
+}
+
+/* Amount */
+.amount-box {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.amount-box p {
+  font-size: 16px;
+}
+
+.amount {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.amount span {
+  font-size: 26px;
+}
+
+.amount input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #1fd365;
+  color: #1fd365;
+  font-size: 34px;
+  width: 260px;
+  outline: none;
+}
+
+/* Date */
+.date-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #0d2a1e;
+  padding: 18px;
+  border-radius: 16px;
+  margin: 26px 0 10px;
+  cursor: pointer;
+}
+
+.date-box h4 {
+  font-size: 16px;
+}
+
+/* Calendar below */
+.calendar-input,
+input[type="datetime-local"] {
+  width: 360px;
+  padding: 12px;
+  background: #0d2a1e;
+  border: none;
+  border-radius: 12px;
+  color: #b7e5c8;
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+/* Section titles */
+.section-title {
+  margin: 28px 0 12px;
+  font-size: 16px;
+  color: #b7e5c8;
+}
+
+/* Category grid (desktop layout) */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+}
+
+.cat {
+  background: #0d2a1e;
+  padding: 18px;
+  border-radius: 14px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.cat.active {
+  background: #1fd365;
+  color: #0b1d14;
+}
+
+/* Payment */
+.payment {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.payment span {
+  flex: 1;
+  text-align: center;
+  background: #0d2a1e;
+  padding: 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.payment .active {
+  background: #1fd365;
+  color: #0b1d14;
+  font-weight: bold;
+}
+
+/* Save */
+.reflection {
+  margin-top: 36px;
+}
+
+.save-btn {
+  width: 300px;
+  background: #1fd365;
+  border: none;
+  padding: 16px;
+  border-radius: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #0b1d14;
+  font-size: 16px;
+}
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}

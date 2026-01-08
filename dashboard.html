@@ -1,0 +1,206 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExpenseInsight | Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="page-bg">
+  <div class="app-card">
+
+    <!-- Header -->
+    <header>
+      <div>
+        <p class="welcome">Welcome back,</p>
+        <h2 id="dashboardUsername">User</h2>
+
+      </div>
+      <i class="fa-regular fa-bell"></i>
+    </header>
+
+    <!-- Balance Card -->
+    <section class="balance-card">
+      <p class="label">TOTAL BALANCE</p>
+      <div class="balance-row">
+        <h1>₹5,400.00</h1>
+        <span class="growth">+12%</span>
+      </div>
+
+      <div class="income-expense">
+        <div>
+          <i class="fa-solid fa-arrow-down income"></i>
+          <p>Income</p>
+          <h4>₹10,000</h4>
+        </div>
+        <div>
+          <i class="fa-solid fa-arrow-up expense"></i>
+          <p>Expense</p>
+          <h4>₹4,600</h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- Behavior Insights -->
+    <section class="insights">
+      <h3>Behavior Insights</h3>
+      <div class="alert-card">
+        <div class="alert-text">
+          <p class="alert-title">
+            <i class="fa-solid fa-triangle-exclamation"></i> Spending Alert
+          </p>
+          <p class="alert-desc">
+            Late-night food orders spiked this weekend.
+            You spent 20% more than usual.
+          </p>
+          <button>Reflect Now</button>
+        </div>
+        <div class="chart-placeholder"></div>
+      </div>
+    </section> 
+
+    
+    <section class="analysis">
+      <div class="analysis-header">
+        <h3>Spending Analysis</h3>
+        <span>See details</span>
+      </div>
+
+      <div class="analysis-card">
+        <div class="analysis-top">
+          <div>
+            <p>Monthly Budget</p>
+            <h4>₹4,600 <span>/ ₹8,000</span></h4>
+          </div>
+          <span class="positive">-5% vs last mo</span>
+        </div>
+
+        <div class="bars">
+          <div class="bar w1"></div>
+          <div class="bar w2"></div>
+          <div class="bar w3 active"></div>
+          <div class="bar w4"></div>
+        </div>
+
+        <div class="weeks">
+          <span>W1</span><span>W2</span><span>W3</span><span>W4</span>
+        </div>
+      </div>
+    </section> 
+
+    <!-- Recent Transactions -->
+    <section class="transactions">
+      <h3>Recent Transactions</h3>
+      <div id="txnList"></div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav>
+      <i class="fa-solid fa-house active"></i>
+      
+      <i class="fa-solid fa-chart-column" onclick="goToAnalysis()"></i>
+
+
+      <!-- PLUS BUTTON (ADDED CLICK) -->
+      <div class="add-btn" onclick="goToAdd()">
+        <i class="fa-solid fa-plus"></i>
+      </div>
+
+      
+      <i class="fa-solid fa-lightbulb" onclick="goToBudget()"></i>
+
+      <i class="fa-solid fa-user" onclick="goProfile()"></i>
+
+    </nav>
+
+  </div>
+</div>
+
+<script>
+  function goToAdd() {
+    window.location.href = "add-transaction.html";
+  }
+  function goProfile() {
+    window.location.href = "profile.html";
+  }
+  function goToBudget() {
+    window.location.href = "index.html";
+  }
+  function goToAnalysis() {
+  window.location.href = "analysis.html";
+}
+
+
+  const txnList = document.getElementById("txnList");
+
+  function loadTransactions() {
+    txnList.innerHTML = "";
+    const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+
+    transactions.reverse().forEach(txn => {
+      const div = document.createElement("div");
+      div.className = "txn";
+
+      div.innerHTML = `
+        <i class="fa-solid fa-bag-shopping food"></i>
+        <div>
+          <h4>${txn.category}</h4>
+          <p>${txn.time}</p>
+        </div>
+        <span class="minus">-₹${txn.amount}</span>
+      `;
+
+      txnList.appendChild(div);
+    });
+  }
+
+  loadTransactions();
+  
+  const balanceEl = document.querySelector(".balance-row h1");
+
+  function loadBalance() {
+    const balance = Number(localStorage.getItem("balance")) || 0;
+    balanceEl.innerText = `₹${balance.toFixed(2)}`;
+  }
+
+  loadBalance();
+  
+</script>
+<script type="module">
+  import { auth, db } from "./firebase.js";
+  import { onAuthStateChanged } from
+    "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { doc, getDoc } from
+    "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const usernameEl = document.getElementById("dashboardUsername");
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.href = "loginindex.html";
+      return;
+    }
+
+    try {
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        usernameEl.innerText =
+          data.name || user.email.split("@")[0];
+      } else {
+        usernameEl.innerText = user.email.split("@")[0];
+      }
+    } catch (err) {
+      console.error(err);
+      usernameEl.innerText = user.email.split("@")[0];
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="page-bg">
+  <div class="profile-card">
+
+    <!-- HEADER -->
+    <header class="profile-header">
+      <i class="fa-solid fa-arrow-left" onclick="goBack()"></i>
+      <h3>Profile</h3>
+      <span class="edit-btn" onclick="editProfile()">Edit</span>
+    </header>
+
+    <!-- USER INFO -->
+    <div class="user-info">
+      <div class="avatar">
+        <i class="fa-solid fa-user user-icon"></i>
+        <img id="profileImg" class="hidden" alt="User">
+        <span class="check"><i class="fa-solid fa-check"></i></span>
+      </div>
+
+      <h2 id="userName">Alex Johnson</h2>
+      <p id="userEmail">alex.j@example.com</p>
+    </div>
+
+    <!-- TOTAL AMOUNT -->
+    <div class="total-box">
+      <p>TOTAL AMOUNT</p>
+      <h1>$0.00</h1>
+    </div>
+
+    <!-- STREAK -->
+    <div class="streak-box">
+      <div>
+        <h4>Streak</h4>
+        <p id="streakCount">0 Days</p>
+      </div>
+      <div class="streak-icon">
+        <i class="fa-solid fa-fire"></i>
+      </div>
+    </div>
+
+    <!-- GENERAL -->
+    <div class="section">
+      <p class="section-title">GENERAL</p>
+
+      <div class="item">
+        <i class="fa-solid fa-layer-group green"></i>
+        <span>Categories</span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+
+      <div class="item">
+        <i class="fa-solid fa-dollar-sign green"></i>
+        <span>Currency</span>
+        <small>USD ($)</small>
+      </div>
+
+      <div class="item">
+        <i class="fa-solid fa-bell green"></i>
+        <span>Notifications</span>
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="item">
+        <i class="fa-solid fa-moon green"></i>
+        <span>Dark Mode</span>
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- SECURITY -->
+    <div class="section">
+      <p class="section-title">SECURITY</p>
+
+      <div class="item">
+        <i class="fa-solid fa-lock green"></i>
+        <span>Change Password</span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+    </div>
+
+    <!-- LOGOUT -->
+    <button id="signoutBtn" class="logout-btn">
+      <i class="fa-solid fa-right-from-bracket"></i> Log Out
+    </button>
+
+    <p class="version">Version 2.4.0</p>
+
+  </div>
+</div>
+
+<!-- Currency Modal -->
+<div id="currencyModal" class="currency-modal hidden">
+  <div class="currency-box">
+    <h3>Select Currency</h3>
+    <button onclick="setCurrency('USD', '$')">USD ($)</button>
+    <button onclick="setCurrency('INR', '₹')">INR (₹)</button>
+    <button onclick="setCurrency('EUR', '€')">EUR (€)</button>
+    <button class="close" onclick="closeCurrency()">Cancel</button>
+  </div>
+</div>
+
+<script type="module" src="profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Budget</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="phone">
+    <header>
+    <span class="back" onclick="goDashboard()">←</span>
+    <h3>Spending Limits</h3>
+    <span class="gear">⚙</span>
+</header>
+
+
+    <h1>Student Budget</h1>
+    <p class="subtitle">Keep track of your monthly spending goals</p>
+
+    <div class="card">
+        <p class="label">TOTAL SPENDING LIMIT</p>
+        <div class="row">
+            <span class="amount">$3000</span>
+            <button class="btn-green">Set Limit</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <p class="label">Overall Status</p>
+        <h2>$2,450 <span>spent of $3,000 limit</span></h2>
+        <div class="progress">
+            <div class="progress-bar green" style="width:82%"></div>
+        </div>
+    </div>
+
+    <div class="category-header">
+        <h3>Categories</h3>
+        <a>Edit All</a>
+    </div>
+
+    <!-- Category -->
+    <div class="category">
+        <div class="cat-left">
+            <div class="icon green">🛒</div>
+            <div>
+                <strong>Groceries</strong>
+                <p>40% used</p>
+            </div>
+        </div>
+        <div class="cat-right">
+            <span>$200 of $500</span>
+            <button>Set Limit</button>
+        </div>
+        <div class="progress">
+            <div class="progress-bar green" style="width:40%"></div>
+        </div>
+    </div>
+
+    <div class="category">
+        <div class="cat-left">
+            <div class="icon orange">🚌</div>
+            <div>
+                <strong>Transport</strong>
+                <p>Near limit</p>
+            </div>
+        </div>
+        <div class="cat-right">
+            <span>$85 of $100</span>
+            <button>Set Limit</button>
+        </div>
+        <div class="progress">
+            <div class="progress-bar orange" style="width:85%"></div>
+        </div>
+    </div>
+
+    <div class="category">
+        <div class="cat-left">
+            <div class="icon red">🎮</div>
+            <div>
+                <strong>Entertainment</strong>
+                <p>Over budget</p>
+            </div>
+        </div>
+        <div class="cat-right red-text">
+            <span>$165 of $150</span>
+            <button>Set Limit</button>
+        </div>
+        <div class="progress">
+            <div class="progress-bar red" style="width:100%"></div>
+        </div>
+    </div>
+
+    <div class="category">
+        <div class="cat-left">
+            <div class="icon blue">🍴</div>
+            <div>
+                <strong>Dining</strong>
+                <p>20% used</p>
+            </div>
+        </div>
+        <div class="cat-right">
+            <span>$60 of $300</span>
+            <button>Set Limit</button>
+        </div>
+        <div class="progress">
+            <div class="progress-bar blue" style="width:20%"></div>
+        </div>
+    </div>
+
+<div class="category">
+  <div class="cat-left">
+    <div class="icon">🛍</div>
+    <div>
+      <strong>Shopping</strong>
+      <p>60% used</p>
+    </div>
+  </div>
+  <div class="cat-right">
+    <span>$150 of $250</span>
+    <button>Set Limit</button>
+  </div>
+  <div class="progress">
+    <div class="progress-bar" style="width:60%"></div>
+  </div>
+</div>
+
+
+    <button class="add">＋ Add New Category</button>
+</div>
+
+<script src="scripts.js"></script>
+<script>
+  function goDashboard() {
+    window.location.href = "dashboard.html";
+  }
+</script>
+<script type="module" src="firebase.js"></script>
+
+</body>
+</html>

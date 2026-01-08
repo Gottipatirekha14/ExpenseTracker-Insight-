@@ -1,0 +1,189 @@
+body {
+    background:#111;
+    font-family: Arial, sans-serif;
+}
+
+.phone {
+    width:360px;
+    margin:20px auto;
+    background:#0f2a1d;
+    color:#fff;
+    padding:20px;
+    border-radius:25px;
+}
+
+header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.subtitle {
+    color:#a4c4b5;
+    font-size:14px;
+}
+
+.card {
+    background:#143826;
+    padding:15px;
+    border-radius:15px;
+    margin:15px 0;
+}
+
+.label {
+    font-size:12px;
+    color:#9fc9b2;
+}
+
+.row {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.amount {
+    font-size:22px;
+    font-weight:bold;
+}
+
+.btn-green {
+    background:#2bff88;
+    border:none;
+    padding:8px 12px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.progress {
+    background:#204533;
+    height:8px;
+    border-radius:10px;
+    margin-top:10px;
+}
+
+.progress-bar {
+    height:100%;
+    border-radius:10px;
+}
+
+.green{background:#2bff88;}
+.orange{background:#ff9f1c;}
+.red{background:#ff4d4d;}
+.blue{background:#4da6ff;}
+.purple{background:#c77dff;}
+
+.category-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.category {
+    background:#143826;
+    padding:12px;
+    border-radius:15px;
+    margin:10px 0;
+}
+
+.cat-left {
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.icon {
+    width:35px;
+    height:35px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:10px;
+}
+
+.icon.green{background:#2bff8833;}
+.icon.orange{background:#ff9f1c33;}
+.icon.red{background:#ff4d4d33;}
+.icon.blue{background:#4da6ff33;}
+.icon.purple{background:#c77dff33;}
+
+.cat-right {
+    display:flex;
+    justify-content:space-between;
+    margin-top:8px;
+}
+
+.cat-right button {
+    background:#1f5c3d;
+    border:none;
+    color:#fff;
+    padding:5px 8px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.red-text {
+    color:#ff4d4d;
+}
+
+.add {
+    width:100%;
+    background:transparent;
+    border:2px dashed #2bff88;
+    color:#2bff88;
+    padding:10px;
+    border-radius:15px;
+    margin-top:15px;
+}
+/* Threshold colors */
+.red {
+  background-color: #ff6b6b;
+}
+/* Medium threshold (50%–75%) */
+.yellow {
+  background-color: #facc15;   /* bright gold yellow */
+}
+
+
+.green {
+  background-color: #1fd365;
+}
+
+.red-text {
+  color: #ff6b6b;
+}
+.yellow-text {
+  color: #facc15;
+}
+
+
+.green-text {
+  color: #1fd365;
+}
+/* Desktop layout support */
+@media (min-width: 1024px) {
+
+  .app-card,
+  .profile-card,
+  .analysis-card,
+  .phone {
+    width: 100%;
+    max-width: 1200px;   /* desktop container */
+    border-radius: 20px;
+  }
+
+  .page-bg {
+    padding: 30px;
+  }
+}
+/* Medium desktop size for Spending Limits page */
+@media (min-width: 1024px) {
+  .phone {
+    width: 760px;        /* medium size */
+    max-width: 90%;
+    border-radius: 24px;
+  }
+
+  body {
+    padding: 40px;
+  }
+}
